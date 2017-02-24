@@ -64,15 +64,16 @@ io.on('logout', ctx => {
 });
 
 let messages = [];
-io.on('message', (ctx, { text }) => {
+io.on('message', (ctx, { text, timeStamp }) => {
   console.log(`[server] message: ${text}`);
   const message = {
     id: messages.length,
     text,
     username: ctx.socket.username,
+    timeStamp
   };
   messages.push(message);
-
+  console.log(messages);
   io.broadcast('messages.new', { message });
 });
 
