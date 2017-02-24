@@ -24,4 +24,4 @@ function select({ users }) { // this will be an array that mirrors the usernames
   return { users };
 }
 
-export default connect(select)(Directory)
+export default connect(select)(UserList)
