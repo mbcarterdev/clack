@@ -30,7 +30,7 @@ io.on('login', (ctx, { username }) => {
   usernames.push(username);
   console.log('this is usernames array: ', usernames);
   ctx.socket.username = username;
-
+  // can we do this? ctx.socket.usernames = usernames?
   io.broadcast('users.login', { username });
 });
 
