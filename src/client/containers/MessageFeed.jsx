@@ -4,16 +4,10 @@ import moment from 'moment';
 import { Feed, Icon } from 'semantic-ui-react';
 import { sendMessage } from '../actions/actions';
 import MessageInput from './MessageInput.jsx';
+import Reactions from './Reactions.jsx';
 // import Notification from './components/Notification'
 
 class MessageFeed extends React.Component {
-    addLikes = (event) => {
-      console.log('this is the event: ', event.target);
-      console.log('this is this: ', this);
-      console.log('You just clicked the like button on the message with id: ', event.target.id);
-    // let likes = this.id;
-    // likes ++;
-  }
 
   showNewMsgNotification = (messages) => {
     if(messages.list.length > 0) {
@@ -36,44 +30,25 @@ class MessageFeed extends React.Component {
     console.log('this is messages: ',messages);
     // console.log('here are the keys from this.props.messages: ',Object.keys(this.props.messages));
     const messageList = messages.list.map(id => messages.entities[id]).map((m, i) => {
-<<<<<<< HEAD
-=======
-      //can I bind this here somewhere?
-      console.log('this is m.id inside the render function: ', m.id);
->>>>>>> feed-sat-2-25
       const date = m.timeStamp;
       const user = m.username;
       const text = m.text;
       return (
         <Feed.Event key={`${i}:${m.id}`}>
           <Feed.Content>
-<<<<<<< HEAD
-          <Feed.User content={user} /><Feed.Date content={date}/>
-            <Feed.Extra text content={text} />
-            <Feed.Meta>
-              <Feed.Like>
-                <Icon name='like' />something that listens for clicks here and counts up likes</Feed.Like>
-=======
             <Feed.Summary date={date} user={user}/>
             <Feed.Extra text content={text} />
             <Feed.Meta>
-              <Feed.Like>
-                <Icon name='like' onClick={this.addLikes}/>something that listens for clicks here and counts up likes</Feed.Like>
->>>>>>> feed-sat-2-25
+              <Reactions/>
             </Feed.Meta>
           </Feed.Content>
         </Feed.Event>
-    )}
+      )}
     )
-    // console.log('this is messageList: ', messageList);
 
     return (
       <div>
-<<<<<<< HEAD
-        <Feed>
-=======
         <Feed size='large'>
->>>>>>> feed-sat-2-25
           {messageList}
         </Feed>
         <MessageInput/>
@@ -82,29 +57,8 @@ class MessageFeed extends React.Component {
   }
 }
 
-function select({ users, messages }) {
+const mapStateToProps = ({ users, messages }) => {
   return { users, messages };
 }
 
-export default connect(select)(MessageFeed)
-
-/*
-const date =
-const user =
-const text =
-<Feed>
-  <Feed.Event>
-    <Feed.Label image={image} />
-    <Feed.Content>
-      <Feed.User something here /><Feed.Date content={date} /> or <Feed.Summary date user />
-      <Feed.Extra  text content = {extraText} />
-      <Feed.Meta>
-        <Feed.Like>
-          <Icon name='like' />something that listens for clicks here and counts up likes</Feed.Like>
-      </Feed.Meta>
-    </Feed.Content>
-  </Feed.Event>
-  */
-  //
-  // const messageList = messages.list.map(id => messages.entities[id]).map((m, i) =>
-  //   <li key={`${i}:${m.id}`}><b>{m.username}: //</b>{m.text}</li>
+export default connect(mapStateToProps)(MessageFeed)
